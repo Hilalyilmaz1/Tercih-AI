@@ -1,0 +1,576 @@
+{
+    "ADANA": {
+        "kira_skoru": 0.6857682619647356,
+        "ulasim_skoru": 0.3695652173913043,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 81.66,
+        "analiz": "Canlı sosyal hayatı ve makul barınma maliyetleriyle dengeli bir şehirdir; kafeler ve eğlence imkanları öğrencileri tatmin edecek kadar fazladır."
+    },
+    "ADIYAMAN": {
+        "kira_skoru": 0.6316120906801007,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 51.19,
+        "analiz": "Sakin bir akademik ortam sunan şehir, ekonomik barınma imkanlarıyla bütçe dostu olsa da sosyal aktivite alanları kısıtlıdır."
+    },
+    "AGRI": {
+        "kira_skoru": 0.7506297229219145,
+        "ulasim_skoru": 0.5652173913043479,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 60.23,
+        "analiz": "Ulaşım kolaylığı ve uygun kira oranlarıyla öne çıkan, maliyet odaklı bir şehirdir; kütüphane ve ders çalışma ortamları temel ihtiyacı karşılar."
+    },
+    "AFYONKARAHISAR": {
+        "kira_skoru": 0.7159949622166246,
+        "ulasim_skoru": 0.3478260869565217,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 56.51,
+        "analiz": "Barınma avantajı yüksek olan şehir, kısıtlı sosyal imkanlarına rağmen odaklanmış bir eğitim hayatı için ekonomik bir zemin hazırlar."
+    },
+    "AKSARAY": {
+        "kira_skoru": 0.7370906801007557,
+        "ulasim_skoru": 0.4891304347826086,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 58.83,
+        "analiz": "Merkezi konumu ve erişilebilir kira fiyatlarıyla ekonomik bir kampüs deneyimi vaat eder; sosyal açıdan gelişmekte olan bir yapıdadır."
+    },
+    "AMASYA": {
+        "kira_skoru": 0.8230478589420656,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 64.46,
+        "analiz": "Yüksek barınma konforu ve huzurlu yapısıyla eğitim odaklı öğrenciler için idealdir; kütüphane imkanları çalışma düzenine katkı sağlar."
+    },
+    "ANKARA": {
+        "kira_skoru": 0.1977959697732998,
+        "ulasim_skoru": 0.5217391304347826,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 63.43,
+        "analiz": "Yaşam maliyetleri zorlayıcı olsa da zengin kütüphaneleri, çalışma alanları ve sınırsız sosyal aktivite imkanlarıyla tam bir akademik merkezdir."
+    },
+    "ANTALYA": {
+        "kira_skoru": 0.3419521410579345,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 65.22,
+        "analiz": "Dinamik sosyal atmosferi ve deniz kenarı avantajıyla yüksek yaşam kalitesi sunar; ancak barınma bütçesini dikkatli yönetmek gerekir."
+    },
+    "ARDAHAN": {
+        "kira_skoru": 0.75,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 59.4,
+        "analiz": "Sakin ve maliyeti düşük bir yaşam arayan öğrenciler için uygundur; sosyal alanlar ve vakit geçirme noktaları sınırlıdır."
+    },
+    "ARTVIN": {
+        "kira_skoru": 0.5894206549118388,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 57.28,
+        "analiz": "Doğal güzellikleri içinde barındıran şehir, mütevazı sosyal imkanları ve ekonomik kira oranlarıyla butik bir eğitim hayatı sunar."
+    },
+    "AYDIN": {
+        "kira_skoru": 0.6196473551637278,
+        "ulasim_skoru": 0.3478260869565217,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 76.95,
+        "analiz": "Ege'nin öğrenci dostu yapısını yansıtır; aktif sosyal yaşamı ve ders çalışma ortamlarıyla öğrenciler için oldukça verimli bir şehirdir."
+    },
+    "BALIKESIR": {
+        "kira_skoru": 0.6180730478589421,
+        "ulasim_skoru": 0.3913043478260869,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 60.32,
+        "analiz": "Stratejik konumu ve ekonomik yapısıyla dikkat çeker; kütüphane ve çalışma ortamları temel ihtiyaçları karşılayacak düzeydedir."
+    },
+    "BARTIN": {
+        "kira_skoru": 0.6914357682619648,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 64.35,
+        "analiz": "Kira avantajları ile huzurlu bir kampüs süreci vaat eder; deniz kenarı olması öğrenciler için önemli bir moral kaynağıdır."
+    },
+    "BATMAN": {
+        "kira_skoru": 0.828463476070529,
+        "ulasim_skoru": 0.6521739130434783,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 66.16,
+        "analiz": "Gelişmiş ulaşım ağı ve yüksek kira avantajıyla bölgenin konforlu duraklarındandır; çalışma ortamları ihtiyaca cevap verir."
+    },
+    "BAYBURT": {
+        "kira_skoru": 0.815302267002519,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 63.93,
+        "analiz": "Düşük yaşam maliyetleri sayesinde ekonomik olarak çok rahattır; ancak sosyal aktivite çeşitliliği bakımından kısıtlıdır."
+    },
+    "BILECIK": {
+        "kira_skoru": 0.7525188916876575,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 58.25,
+        "analiz": "Metropollere yakınlığı ve uygun barınma olanaklarıyla dengeli bir tercih imkanı sunan, sakin bir eğitim merkezidir."
+    },
+    "BINGOL": {
+        "kira_skoru": 0.8406801007556676,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 64.36,
+        "analiz": "Ekonomik bir akademik hayat için yüksek kira avantajı sunar; sosyal vakit geçirme alanları kısıtlı ancak huzurludur."
+    },
+    "BITLIS": {
+        "kira_skoru": 0.8756297229219143,
+        "ulasim_skoru": 0.6521739130434783,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 69.43,
+        "analiz": "Hem ulaşım hem barınma açısından çok yüksek skorlara sahiptir; bütçe dostu yapısıyla öğrenciyi yormayan bir şehirdir."
+    },
+    "BOLU": {
+        "kira_skoru": 0.6763224181360202,
+        "ulasim_skoru": 0.0,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 51.65,
+        "analiz": "Doğal yaşamla iç içe, barınma maliyetleri makul bir şehirdir; kütüphane ve çalışma ortamları temel seviyede hizmet verir."
+    },
+    "BURDUR": {
+        "kira_skoru": 0.8674433249370277,
+        "ulasim_skoru": 0.0869565217391304,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 65.43,
+        "analiz": "Kira maliyetlerinin en düşük olduğu şehirlerden biridir; sosyal imkanlar sınırlı olsa da bütçe dostu bir eğitim hayatı sunar."
+    },
+    "BURSA": {
+        "kira_skoru": 0.6297229219143577,
+        "ulasim_skoru": 0.6982608695652175,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 79.77,
+        "analiz": "Geniş ulaşım ve sosyal imkanlarıyla ideal bir metropoldür; kütüphane zenginliği ve kafeleriyle öğrenciyi destekleyen bir yapısı vardır."
+    },
+    "CANAKKALE": {
+        "kira_skoru": 0.3526448362720403,
+        "ulasim_skoru": 0.2608695652173913,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 57.91,
+        "analiz": "Özgürlükçü sosyal ortamı ve deniz kenarı avantajıyla çok popülerdir; kütüphane imkanları akademik başarıyı destekler."
+    },
+    "CANKIRI": {
+        "kira_skoru": 0.906801007556675,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 70.27,
+        "analiz": "Barınma imkanlarının en üst seviyede kolaylık sağladığı, sakin ve derslerine odaklanmak isteyen öğrenciler için ideal bir merkezdir."
+    },
+    "CORUM": {
+        "kira_skoru": 0.8312342569269522,
+        "ulasim_skoru": 0.5652173913043479,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 82.6,
+        "analiz": "Oldukça ekonomik bir şehir olmasına rağmen sosyal aktiviteler ve kütüphane imkanları bakımından öğrencileri fazlasıyla tatmin eder."
+    },
+    "DENIZLI": {
+        "kira_skoru": 0.8186397984886651,
+        "ulasim_skoru": 0.5,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 81.33,
+        "analiz": "Gelişmiş şehir yapısı ve uygun yaşam maliyetlerini birleştiren, kütüphane ve çalışma alanları zengin, tam bir öğrenci kentidir."
+    },
+    "DIYARBAKIR": {
+        "kira_skoru": 0.6045340050377834,
+        "ulasim_skoru": 0.6521739130434783,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 67.41,
+        "analiz": "Bölgesel cazibe merkezi olarak güçlü bir ulaşım ağına, zengin sosyal imkanlara ve yeterli kütüphane ortamlarına sahiptir."
+    },
+    "DUZCE": {
+        "kira_skoru": 0.9445843828715366,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 81.9,
+        "analiz": "Konaklama avantajı çok yüksek ve bütçe dostudur; sosyal alanlar kısıtlı olsa da ders çalışma ortamları ihtiyacı karşılar."
+    },
+    "EDIRNE": {
+        "kira_skoru": 0.7052896725440807,
+        "ulasim_skoru": 0.3782608695652173,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 66.29,
+        "analiz": "Kültürel derinliği ve erişilebilir yaşam koşullarıyla Trakya'nın eğitim kalbidir; ders çalışmak için huzurlu alanlar sunar."
+    },
+    "ELAZIG": {
+        "kira_skoru": 0.6926952141057935,
+        "ulasim_skoru": 0.5217391304347826,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 72.73,
+        "analiz": "Aktif sosyal yaşantısı, dengeli kira oranları ve kütüphane imkanlarıyla Doğu Anadolu'da öne çıkan verimli bir öğrenci merkezidir."
+    },
+    "ERZINCAN": {
+        "kira_skoru": 0.7682619647355164,
+        "ulasim_skoru": 0.7391304347826086,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 79.29,
+        "analiz": "Güçlü ulaşım altyapısı, sosyal olanakları ve öğrenci odaklı ders çalışma alanlarıyla memnuniyetin yüksek olduğu bir kenttir."
+    },
+    "ERZURUM": {
+        "kira_skoru": 0.7430730478589421,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 75.7,
+        "analiz": "Bir üniversite şehri klasiği olarak hem sosyal hem ekonomik açıdan dengelidir; kütüphane zenginliği akademik hayata büyük katkı sağlar."
+    },
+    "ESKISEHIR": {
+        "kira_skoru": 0.7556675062972292,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 76.57,
+        "analiz": "Türkiye'nin öğrenci başkenti; sosyal yaşam, kafeler ve çalışma alanları açısından kusursuz bir denge ve kalite sunar."
+    },
+    "GAZIANTEP": {
+        "kira_skoru": 0.8060453400503779,
+        "ulasim_skoru": 0.5217391304347826,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 80.59,
+        "analiz": "Gelişmiş şehir yapısı ve gastronomi kültürüyle öğrencilere çok yönlü bir yaşam ve zengin çalışma ortamları sunar."
+    },
+    "GIRESUN": {
+        "kira_skoru": 0.698992443324937,
+        "ulasim_skoru": 0.4782608695652174,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 56.13,
+        "analiz": "Sahil kenti avantajı ve makul kiralarıyla huzurlu bir eğitim süreci sunar; kütüphane imkanları ihtiyacı karşılayacak düzeydedir."
+    },
+    "GUMUSHANE": {
+        "kira_skoru": 0.8690176322418136,
+        "ulasim_skoru": 0.3478260869565217,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 67.12,
+        "analiz": "Ekonomik barınma imkanlarının en güçlü olduğu şehirlerdendir; sosyal alanlar kısıtlı olsa da bütçe dostu yapısı avantajlıdır."
+    },
+    "HAKKARI": {
+        "kira_skoru": 0.9193954659949622,
+        "ulasim_skoru": 0.7391304347826086,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 72.99,
+        "analiz": "Ulaşım kolaylığı ve barınma uygunluğuyla ekonomik destek sağlar; akademik çalışma ortamları temel düzeyde hizmet verir."
+    },
+    "HATAY": {
+        "kira_skoru": 0.8564231738035265,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 75.79,
+        "analiz": "Kira avantajı ve zengin kültürel yapısıyla öne çıkan ekonomik bir güney şehridir; kütüphane imkanları geliştirilmektedir."
+    },
+    "IGDIR": {
+        "kira_skoru": 0.6234256926952142,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 50.62,
+        "analiz": "Oldukça ekonomik ve bütçe dostu bir şehirdir; ancak sosyal aktivite ve kütüphane imkanları maalesef biraz kısıtlıdır."
+    },
+    "ISPARTA": {
+        "kira_skoru": 0.8249370277078086,
+        "ulasim_skoru": 0.2608695652173913,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 80.32,
+        "analiz": "Öğrenci odaklı şehir yapısı, kütüphane zenginliği ve sosyal imkanlarıyla yaşam kalitesi ve akademik verimliliği yüksek bir merkezdir."
+    },
+    "ISTANBUL": {
+        "kira_skoru": 0.0,
+        "ulasim_skoru": 0.5139130434782608,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 55.0,
+        "analiz": "Maliyetler çok yüksek olsa da sosyal imkanlar, kütüphane zenginliği ve deniz kenarı avantajıyla sınırsız fırsatlar sunar."
+    },
+    "IZMIR": {
+        "kira_skoru": 0.142947103274559,
+        "ulasim_skoru": 0.6521739130434783,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 45.75,
+        "analiz": "Sosyal yaşamı, deniz kenarı konumu ve zengin kütüphaneleriyle öğrencileri mest eder; ancak kira bütçesini zorlayabilir."
+    },
+    "KAHRAMANMARAS": {
+        "kira_skoru": 0.6700251889168767,
+        "ulasim_skoru": 0.6086956521739131,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 71.69,
+        "analiz": "Ulaşım ve sosyal imkanların dengeli dağıldığı, verimli çalışma ortamlarına sahip gelişmiş bir yaşam alanı sunar."
+    },
+    "KARABUK": {
+        "kira_skoru": 0.8161209068010076,
+        "ulasim_skoru": 0.3913043478260869,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 63.72,
+        "analiz": "Üniversitenin şehirle bütünleştiği, barınma imkanları geniş bir merkezdir; kütüphane ortamları öğrencileri destekler."
+    },
+    "KARAMAN": {
+        "kira_skoru": 0.7506297229219144,
+        "ulasim_skoru": 1.0,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 62.87,
+        "analiz": "Ulaşım skorunda zirvededir; erişilebilirlik, kira avantajı ve sakin yapısıyla odaklanmış bir eğitim için uygundur."
+    },
+    "KARS": {
+        "kira_skoru": 0.8337531486146096,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 63.88,
+        "analiz": "Farklı bir atmosfer ve uygun kira oranları sunar; kütüphane ve ders çalışma ortamları ihtiyacı karşılar."
+    },
+    "KASTAMONU": {
+        "kira_skoru": 0.8073047858942065,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 90.48,
+        "analiz": "Ekonomikliği, sosyal imkanları ve deniz kenarı avantajıyla yaşam endeksinde en üst sıralarda yer alan huzurlu bir kenttir."
+    },
+    "KAYSERI": {
+        "kira_skoru": 0.7191435768261967,
+        "ulasim_skoru": 0.4891304347826086,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 74.37,
+        "analiz": "Düzenli şehir yapısı, kütüphane zenginliği ve geniş sosyal imkanlarıyla İç Anadolu'nun en verimli merkezlerindendir."
+    },
+    "KIRIKKALE": {
+        "kira_skoru": 0.8790931989924433,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 68.35,
+        "analiz": "Ankara'ya yakınlığı ve çok uygun kiralarıyla stratejik bir tercihtir; kütüphane imkanları ders çalışmak için yeterlidir."
+    },
+    "KIRKLARELI": {
+        "kira_skoru": 0.5188916876574308,
+        "ulasim_skoru": 0.0,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 51.07,
+        "analiz": "Sakin bir yaşam tercih edenler için butik bir deneyim sunar; kütüphane ve çalışma alanları öğrencilerin ihtiyacını görür."
+    },
+    "KIRSEHIR": {
+        "kira_skoru": 0.7581863979848867,
+        "ulasim_skoru": 0.5217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 60.49,
+        "analiz": "Ulaşım kolaylığı ve dengeli yaşam maliyetleriyle odaklanmış bir eğitim hayatı vaat eden, kütüphane ortamı yeterli bir şehirdir."
+    },
+    "KILIS": {
+        "kira_skoru": 1.0,
+        "ulasim_skoru": 0.3043478260869565,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 75.94,
+        "analiz": "Barınma maliyetlerinin en düşük olduğu şehir olarak ekonomik açıdan rakipsizdir; sosyal imkanları ise sınırlıdır."
+    },
+    "KOCAELI": {
+        "kira_skoru": 0.4861460957178841,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 66.9,
+        "analiz": "Sanayinin kalbinde, sosyal imkanları gelişmiş, deniz kenarı avantajı olan ve kütüphane olanakları zengin bir öğrenci kentidir."
+    },
+    "KONYA": {
+        "kira_skoru": 0.6322418136020151,
+        "ulasim_skoru": 0.6956521739130435,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 69.6,
+        "analiz": "Geniş ulaşım ağı, büyük kampüsleri ve zengin kütüphane olanaklarıyla tam bir üniversite şehri kimliği taşır."
+    },
+    "KUTAHYA": {
+        "kira_skoru": 0.77455919395466,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 59.78,
+        "analiz": "Tarihi dokusu ve uygun barınma koşullarıyla mütevazı bir yaşam sunar; kütüphane ortamları akademik destek sağlar."
+    },
+    "MALATYA": {
+        "kira_skoru": 0.6309823677581864,
+        "ulasim_skoru": 0.5652173913043479,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 68.72,
+        "analiz": "Gelişmiş altyapısı, yeterli kütüphane ortamları ve sosyal olanaklarıyla bölgenin yaşanabilir şehirleri arasındadır."
+    },
+    "MANISA": {
+        "kira_skoru": 0.5969773299748111,
+        "ulasim_skoru": 0.5108695652173914,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 66.03,
+        "analiz": "İzmir'e yakınlığı, aktif sosyal dinamizmi ve çalışma alanlarıyla öğrenciler için cazip bir seçenektir."
+    },
+    "MARDIN": {
+        "kira_skoru": 0.8375314861460957,
+        "ulasim_skoru": 0.5652173913043479,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 83.04,
+        "analiz": "Hem ekonomik hem de sosyal açıdan tatmin edicidir; kütüphane ve ders çalışma ortamları ihtiyacı fazlasıyla karşılar."
+    },
+    "MERSIN": {
+        "kira_skoru": 0.6045340050377834,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 76.43,
+        "analiz": "Sahil şehri konforu, deniz kenarı moral kaynağı ve aktif sosyal yaşamıyla öğrencilere keyifli bir süreç sunar."
+    },
+    "MUGLA": {
+        "kira_skoru": 0.2871536523929471,
+        "ulasim_skoru": 0.5652173913043479,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 55.22,
+        "analiz": "Doğası ve sosyal olanaklarıyla yüksek yaşam kalitesi sunar; deniz kenarı avantajı ve çalışma alanları dengelidir."
+    },
+    "MUS": {
+        "kira_skoru": 0.9061712846347608,
+        "ulasim_skoru": 0.7608695652173914,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 72.2,
+        "analiz": "Ulaşım ve barınma uygunluğunda çok başarılıdır; kütüphane olanakları temel akademik çalışmalar için yeterlidir."
+    },
+    "NEVSEHIR": {
+        "kira_skoru": 0.7481108312342569,
+        "ulasim_skoru": 0.3478260869565217,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 75.52,
+        "analiz": "Turistik atmosferi, sosyal imkanları ve özgün çalışma alanlarıyla öğrencilere farklı bir yaşam alanı sunar."
+    },
+    "NIGDE": {
+        "kira_skoru": 0.5831234256926954,
+        "ulasim_skoru": 0.5,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 65.01,
+        "analiz": "Ulaşım kolaylığı, kütüphane zenginliği ve aktif sosyal yapısıyla dengeli bir öğrenci hayatı için uygundur."
+    },
+    "ORDU": {
+        "kira_skoru": 0.6309823677581864,
+        "ulasim_skoru": 0.3978260869565218,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 78.04,
+        "analiz": "Karadeniz'in sosyal ve modern yüzüdür; deniz kenarı olması ve çalışma ortamlarının kalitesiyle yüksek memnuniyet sağlar."
+    },
+    "OSMANIYE": {
+        "kira_skoru": 0.7292191435768263,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 57.96,
+        "analiz": "Dengeli kira oranları ile sakin ve bütçe dostu bir yaşantı sunar; kütüphane ortamları ihtiyaca cevap vermektedir."
+    },
+    "RIZE": {
+        "kira_skoru": 0.610831234256927,
+        "ulasim_skoru": 0.3043478260869565,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 76.07,
+        "analiz": "Artan sosyal imkanları, zengin doğası ve deniz kenarı konumuyla öğrencilerin moral bulduğu bir merkezdir."
+    },
+    "SAKARYA": {
+        "kira_skoru": 0.6644836272040302,
+        "ulasim_skoru": 0.2608695652173913,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 79.53,
+        "analiz": "Gelişmiş kampüs hayatı, sosyal olanakları ve kütüphane zenginliğiyle Marmara'nın popüler öğrenci duraklarındandır."
+    },
+    "SAMSUN": {
+        "kira_skoru": 0.9445843828715366,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 91.0,
+        "analiz": "Hem çok ekonomik hem de sosyal açıdan çok zengindir; kütüphaneleri ve deniz kenarı konumuyla mükemmel bir şehirdir."
+    },
+    "SIIRT": {
+        "kira_skoru": 0.8718513853904282,
+        "ulasim_skoru": 0.6086956521739131,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 68.9,
+        "analiz": "Erişilebilir ulaşımı ve düşük kiralarıyla tam bir bütçe dostudur; akademik çalışma ortamları yeterli düzeydedir."
+    },
+    "SINOP": {
+        "kira_skoru": 0.5491183879093199,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 71.27,
+        "analiz": "Huzurlu yapısı, sosyal skoru ve deniz kenarı moral kaynağıyla butik ve keyifli bir sahil şehri deneyimi sunar."
+    },
+    "SIVAS": {
+        "kira_skoru": 0.5390428211586902,
+        "ulasim_skoru": 0.3913043478260869,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 61.29,
+        "analiz": "Köklü eğitim geleneği, kütüphane imkanları ve aktif sosyal yapısıyla öğrencilere verimli bir atmosfer vaat eder."
+    },
+    "SANLIURFA": {
+        "kira_skoru": 0.7903022670025189,
+        "ulasim_skoru": 0.5652173913043479,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 79.76,
+        "analiz": "Tarihi derinliği, ulaşım kolaylığı ve sosyal canlılığıyla kütüphane ortamları da yeterli olan verimli bir merkezdir."
+    },
+    "SIRNAK": {
+        "kira_skoru": 0.8123425692695214,
+        "ulasim_skoru": 0.3478260869565217,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 63.19,
+        "analiz": "Barınma uygunluğu ile öne çıkar; sosyal alanlar kısıtlı olsa da bütçe planlaması için ideal ve sakin bir tercihtir."
+    },
+    "TEKIRDAG": {
+        "kira_skoru": 0.6738035264483628,
+        "ulasim_skoru": 0.3478260869565217,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 80.7,
+        "analiz": "Deniz kenarı konumu ve aktif sosyal yaşamıyla moral depolar; kütüphane ve çalışma alanları akademik süreci destekler."
+    },
+    "TOKAT": {
+        "kira_skoru": 0.7455919395465995,
+        "ulasim_skoru": 0.3043478260869565,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 58.3,
+        "analiz": "Düşük kira maliyetleri ve sakin şehir yapısıyla huzurlu bir eğitim hayatı vaat eden, bütçe dostu bir şehirdir."
+    },
+    "TRABZON": {
+        "kira_skoru": 0.6596347607052897,
+        "ulasim_skoru": 0.6521739130434783,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 81.57,
+        "analiz": "Dinamik sosyal altyapısı, deniz kenarı konumu ve kütüphane zenginliğiyle bölgenin en güçlü öğrenci merkezidir."
+    },
+    "TUNCELI": {
+        "kira_skoru": 0.3904282115869018,
+        "ulasim_skoru": 0.5217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 35.0,
+        "analiz": "Doğal güzellikleri ve ulaşım imkanlarıyla butik bir deneyim sunar; ancak sosyal aktivite alanları geliştirilmeye muhtaçtır."
+    },
+    "USAK": {
+        "kira_skoru": 0.7984886649874057,
+        "ulasim_skoru": 0.3043478260869565,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 61.97,
+        "analiz": "Ekonomik barınma koşullarıyla bütçesini düşünenler için idealdir; kütüphane ve ders çalışma ortamları temel ihtiyaçları karşılar."
+    },
+    "VAN": {
+        "kira_skoru": 0.7229219143576826,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 74.3,
+        "analiz": "Göl kıyısı avantajı, zengin sosyal imkanları ve yeterli kütüphane olanaklarıyla bölgenin en canlı şehirleri arasındadır."
+    },
+    "YALOVA": {
+        "kira_skoru": 0.542191435768262,
+        "ulasim_skoru": 0.0,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 69.46,
+        "analiz": "Metropollere yakınlığı, yüksek sosyal puanı ve deniz kenarı moral faktörüyle öğrenciler için dengeli bir merkezdir."
+    },
+    "YOZGAT": {
+        "kira_skoru": 0.9408060453400504,
+        "ulasim_skoru": 0.5652173913043479,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 73.42,
+        "analiz": "Barınma avantajında zirvede yer alır ve ekonomiklik vaat eder; ancak sosyal vakit geçirme alanları oldukça kısıtlıdır."
+    },
+    "ZONGULDAK": {
+        "kira_skoru": 0.6259445843828716,
+        "ulasim_skoru": 0.3043478260869565,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 77.12,
+        "analiz": "Özgün coğrafyası, deniz kenarı avantajı ve canlı sosyal dokusuyla öğrencilere farklı ve verimli bir deneyim sunar."
+    },
+      "GEBZE": {
+        "kira_skoru": 0.4861460957178841,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 66.9,
+        "analiz": "Sanayinin kalbinde, sosyal imkanları gelişmiş, deniz kenarı avantajı olan ve kütüphane olanakları zengin bir öğrenci kentidir."
+    }
+}

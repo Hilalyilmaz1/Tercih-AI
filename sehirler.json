@@ -1,0 +1,488 @@
+{
+    "ADANA": {
+        "kira_skoru": 0.6857682619647356,
+        "ulasim_skoru": 0.3695652173913043,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 81.66
+    },
+    "AD?YAMAN": {
+        "kira_skoru": 0.6316120906801007,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 51.19
+    },
+    "A?R?": {
+        "kira_skoru": 0.7506297229219145,
+        "ulasim_skoru": 0.5652173913043479,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 60.23
+    },
+    "AFYONKARAHISAR": {
+        "kira_skoru": 0.7159949622166246,
+        "ulasim_skoru": 0.3478260869565217,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 56.51
+    },
+    "AKSARAY": {
+        "kira_skoru": 0.7370906801007557,
+        "ulasim_skoru": 0.4891304347826086,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 58.83
+    },
+    "AMASYA": {
+        "kira_skoru": 0.8230478589420656,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 64.46
+    },
+    "ANKARA": {
+        "kira_skoru": 0.1977959697732998,
+        "ulasim_skoru": 0.5217391304347826,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 38.43
+    },
+    "ANTALYA": {
+        "kira_skoru": 0.3419521410579345,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 58.22
+    },
+    "ARDAHAN": {
+        "kira_skoru": 0.75,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 59.4
+    },
+    "ARTVIN": {
+        "kira_skoru": 0.5894206549118388,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 57.28
+    },
+    "AYD?N": {
+        "kira_skoru": 0.6196473551637278,
+        "ulasim_skoru": 0.3478260869565217,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 76.95
+    },
+    "BAL?KESIR": {
+        "kira_skoru": 0.6180730478589421,
+        "ulasim_skoru": 0.3913043478260869,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 60.32
+    },
+    "BART?N": {
+        "kira_skoru": 0.6914357682619648,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 64.35
+    },
+    "BATMAN": {
+        "kira_skoru": 0.828463476070529,
+        "ulasim_skoru": 0.6521739130434783,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 66.16
+    },
+    "BAYBURT": {
+        "kira_skoru": 0.815302267002519,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 63.93
+    },
+    "BILECIK": {
+        "kira_skoru": 0.7525188916876575,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 58.25
+    },
+    "BINGÖL": {
+        "kira_skoru": 0.8406801007556676,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 64.36
+    },
+    "BITLIS": {
+        "kira_skoru": 0.8756297229219143,
+        "ulasim_skoru": 0.6521739130434783,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 69.43
+    },
+    "BOLU": {
+        "kira_skoru": 0.6763224181360202,
+        "ulasim_skoru": 0.0,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 51.65
+    },
+    "BURDUR": {
+        "kira_skoru": 0.8674433249370277,
+        "ulasim_skoru": 0.0869565217391304,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 65.43
+    },
+    "BURSA": {
+        "kira_skoru": 0.6297229219143577,
+        "ulasim_skoru": 0.6982608695652175,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 79.77
+    },
+    "ÇANAKKALE": {
+        "kira_skoru": 0.3526448362720403,
+        "ulasim_skoru": 0.2608695652173913,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 57.91
+    },
+    "ÇANK?R?": {
+        "kira_skoru": 0.906801007556675,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 70.27
+    },
+    "ÇORUM": {
+        "kira_skoru": 0.8312342569269522,
+        "ulasim_skoru": 0.5652173913043479,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 82.6
+    },
+    "DENIZLI": {
+        "kira_skoru": 0.8186397984886651,
+        "ulasim_skoru": 0.5,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 81.33
+    },
+    "DIYARBAK?R": {
+        "kira_skoru": 0.6045340050377834,
+        "ulasim_skoru": 0.6521739130434783,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 67.41
+    },
+    "DÜZCE": {
+        "kira_skoru": 0.9445843828715366,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 81.9
+    },
+    "EDIRNE": {
+        "kira_skoru": 0.7052896725440807,
+        "ulasim_skoru": 0.3782608695652173,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 66.29
+    },
+    "ELAZ??": {
+        "kira_skoru": 0.6926952141057935,
+        "ulasim_skoru": 0.5217391304347826,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 72.73
+    },
+    "ERZINCAN": {
+        "kira_skoru": 0.7682619647355164,
+        "ulasim_skoru": 0.7391304347826086,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 79.29
+    },
+    "ERZURUM": {
+        "kira_skoru": 0.7430730478589421,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 75.7
+    },
+    "ESKI?EHIR": {
+        "kira_skoru": 0.7556675062972292,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 76.57
+    },
+    "GAZIANTEP": {
+        "kira_skoru": 0.8060453400503779,
+        "ulasim_skoru": 0.5217391304347826,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 80.59
+    },
+    "GIRESUN": {
+        "kira_skoru": 0.698992443324937,
+        "ulasim_skoru": 0.4782608695652174,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 56.13
+    },
+    "GÜMÜ?HANE": {
+        "kira_skoru": 0.8690176322418136,
+        "ulasim_skoru": 0.3478260869565217,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 67.12
+    },
+    "HAKKARI": {
+        "kira_skoru": 0.9193954659949622,
+        "ulasim_skoru": 0.7391304347826086,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 72.99
+    },
+    "HATAY": {
+        "kira_skoru": 0.8564231738035265,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 75.79
+    },
+    "I?D?R": {
+        "kira_skoru": 0.6234256926952142,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 50.62
+    },
+    "ISPARTA": {
+        "kira_skoru": 0.8249370277078086,
+        "ulasim_skoru": 0.2608695652173913,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 80.32
+    },
+    "?STANBUL": {
+        "kira_skoru": 0.0,
+        "ulasim_skoru": 0.5139130434782608,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 35.0
+    },
+    "?ZMIR": {
+        "kira_skoru": 0.142947103274559,
+        "ulasim_skoru": 0.6521739130434783,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 45.75
+    },
+    "KAHRAMANMARA?": {
+        "kira_skoru": 0.6700251889168767,
+        "ulasim_skoru": 0.6086956521739131,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 71.69
+    },
+    "KARABÜK": {
+        "kira_skoru": 0.8161209068010076,
+        "ulasim_skoru": 0.3913043478260869,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 63.72
+    },
+    "KARAMAN": {
+        "kira_skoru": 0.7506297229219144,
+        "ulasim_skoru": 1.0,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 62.87
+    },
+    "KARS": {
+        "kira_skoru": 0.8337531486146096,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 63.88
+    },
+    "KASTAMONU": {
+        "kira_skoru": 0.8073047858942065,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 90.48
+    },
+    "KAYSERI": {
+        "kira_skoru": 0.7191435768261967,
+        "ulasim_skoru": 0.4891304347826086,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 74.37
+    },
+    "K?R?KKALE": {
+        "kira_skoru": 0.8790931989924433,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 68.35
+    },
+    "K?RKLARELI": {
+        "kira_skoru": 0.5188916876574308,
+        "ulasim_skoru": 0.0,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 51.07
+    },
+    "K?R?EHIR": {
+        "kira_skoru": 0.7581863979848867,
+        "ulasim_skoru": 0.5217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 60.49
+    },
+    "KILIS": {
+        "kira_skoru": 1.0,
+        "ulasim_skoru": 0.3043478260869565,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 75.94
+    },
+    "KOCAELI": {
+        "kira_skoru": 0.4861460957178841,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 66.9
+    },
+    "KONYA": {
+        "kira_skoru": 0.6322418136020151,
+        "ulasim_skoru": 0.6956521739130435,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 69.6
+    },
+    "KÜTAHYA": {
+        "kira_skoru": 0.77455919395466,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 59.78
+    },
+    "MALATYA": {
+        "kira_skoru": 0.6309823677581864,
+        "ulasim_skoru": 0.5652173913043479,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 68.72
+    },
+    "MANISA": {
+        "kira_skoru": 0.5969773299748111,
+        "ulasim_skoru": 0.5108695652173914,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 66.03
+    },
+    "MARDIN": {
+        "kira_skoru": 0.8375314861460957,
+        "ulasim_skoru": 0.5652173913043479,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 83.04
+    },
+    "MERSIN": {
+        "kira_skoru": 0.6045340050377834,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 76.43
+    },
+    "MU?LA": {
+        "kira_skoru": 0.2871536523929471,
+        "ulasim_skoru": 0.5652173913043479,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 55.22
+    },
+    "MU?": {
+        "kira_skoru": 0.9061712846347608,
+        "ulasim_skoru": 0.7608695652173914,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 72.2
+    },
+    "NEV?EHIR": {
+        "kira_skoru": 0.7481108312342569,
+        "ulasim_skoru": 0.3478260869565217,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 75.52
+    },
+    "NI?DE": {
+        "kira_skoru": 0.5831234256926954,
+        "ulasim_skoru": 0.5,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 65.01
+    },
+    "ORDU": {
+        "kira_skoru": 0.6309823677581864,
+        "ulasim_skoru": 0.3978260869565218,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 78.04
+    },
+    "OSMANIYE": {
+        "kira_skoru": 0.7292191435768263,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 57.96
+    },
+    "RIZE": {
+        "kira_skoru": 0.610831234256927,
+        "ulasim_skoru": 0.3043478260869565,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 76.07
+    },
+    "SAKARYA": {
+        "kira_skoru": 0.6644836272040302,
+        "ulasim_skoru": 0.2608695652173913,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 79.53
+    },
+    "SAMSUN": {
+        "kira_skoru": 0.9445843828715366,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 100.0
+    },
+    "SIIRT": {
+        "kira_skoru": 0.8718513853904282,
+        "ulasim_skoru": 0.6086956521739131,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 68.9
+    },
+    "SINOP": {
+        "kira_skoru": 0.5491183879093199,
+        "ulasim_skoru": 0.217391304347826,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 71.27
+    },
+    "SIVAS": {
+        "kira_skoru": 0.5390428211586902,
+        "ulasim_skoru": 0.3913043478260869,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 61.29
+    },
+    "?ANL?URFA": {
+        "kira_skoru": 0.7903022670025189,
+        "ulasim_skoru": 0.5652173913043479,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 79.76
+    },
+    "??RNAK": {
+        "kira_skoru": 0.8123425692695214,
+        "ulasim_skoru": 0.3478260869565217,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 63.19
+    },
+    "TEKIRDA?": {
+        "kira_skoru": 0.6738035264483628,
+        "ulasim_skoru": 0.3478260869565217,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 80.7
+    },
+    "TOKAT": {
+        "kira_skoru": 0.7455919395465995,
+        "ulasim_skoru": 0.3043478260869565,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 58.3
+    },
+    "TRABZON": {
+        "kira_skoru": 0.6596347607052897,
+        "ulasim_skoru": 0.6521739130434783,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 81.57
+    },
+    "TUNCELI": {
+        "kira_skoru": 0.3904282115869018,
+        "ulasim_skoru": 0.5217391304347826,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 35.0
+    },
+    "U?AK": {
+        "kira_skoru": 0.7984886649874057,
+        "ulasim_skoru": 0.3043478260869565,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 61.97
+    },
+    "VAN": {
+        "kira_skoru": 0.7229219143576826,
+        "ulasim_skoru": 0.4347826086956522,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 74.3
+    },
+    "YALOVA": {
+        "kira_skoru": 0.542191435768262,
+        "ulasim_skoru": 0.0,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 69.46
+    },
+    "YOZGAT": {
+        "kira_skoru": 0.9408060453400504,
+        "ulasim_skoru": 0.5652173913043479,
+        "sosyal_skoru": 0.0,
+        "yasam_ml_pct": 73.42
+    },
+    "ZONGULDAK": {
+        "kira_skoru": 0.6259445843828716,
+        "ulasim_skoru": 0.3043478260869565,
+        "sosyal_skoru": 1.0,
+        "yasam_ml_pct": 77.12
+    }
+}

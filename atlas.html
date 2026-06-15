@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tercih AI | Akıllı Arama</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; color: #f8fafc; }
+        .glass-card { background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .tab-btn.active { background: #3b82f6; color: white; border-color: #3b82f6; }
+        .result-item { border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.2s; }
+        .result-item:hover { background: rgba(59, 130, 246, 0.15); transform: scale(1.002); }
+        
+        .city-score-circle {
+            width: 48px; height: 48px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 13px; border: 2.5px solid;
+            background: rgba(15, 23, 42, 0.6); box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            cursor: help;
+        }
+
+        .tooltip-container { position: relative; }
+        .tooltip-box {
+            visibility: hidden;
+            width: 300px;
+            background-color: #0f172a;
+            color: #f1f5f9;
+            text-align: left;
+            border: 1px solid #3b82f6;
+            border-radius: 12px;
+            padding: 15px;
+            position: absolute;
+            z-index: 100;
+            bottom: 130%;
+            left: 50%;
+            transform: translateX(-50%) translateY(10px);
+            opacity: 0;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            font-size: 12px;
+            line-height: 1.6;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.7);
+            pointer-events: none;
+        }
+        .tooltip-container:hover .tooltip-box {
+            visibility: visible;
+            opacity: 1;
+            transform: translateX(-50%) translateY(0);
+        }
+        .tooltip-box::after {
+            content: "";
+            position: absolute;
+            top: 100%; left: 50%;
+            margin-left: -6px;
+            border-width: 6px;
+            border-style: solid;
+            border-color: #3b82f6 transparent transparent transparent;
+        }
+    </style>
+</head>
+<body class="min-h-screen pb-20">
+
+    <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-xl border-b border-white/10 py-6 px-4">
+        <div class="max-w-5xl mx-auto">
+            <div class="flex flex-col lg:flex-row gap-4 items-center">
+                <h1 class="text-3xl font-black tracking-tighter text-blue-500 italic uppercase shrink-0">Tercih<span class="text-white">AI</span></h1>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 flex-1 w-full">
+                    <div class="sm:col-span-2">
+                        <input type="text" id="searchInput" oninput="araDebounced()" 
+                            placeholder="Bölüm, Üniversite veya Şehir..." 
+                            class="w-full bg-slate-800 border border-white/10 p-4 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 text-white transition-all shadow-2xl">
+                    </div>
+                    <div>
+                        <input type="text" id="siraInput" oninput="araDebounced()" 
+                            placeholder="Maks. Sıralama (Örn: 230.360)" 
+                            class="w-full bg-slate-800 border border-white/10 p-4 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 text-white transition-all shadow-2xl">
+                    </div>
+                    <div>
+                        <input type="number" id="puanInput" oninput="araDebounced()" step="any"
+                            placeholder="Maks. Puan (Örn: 380)" 
+                            class="w-full bg-slate-800 border border-white/10 p-4 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 text-white transition-all shadow-2xl [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
+                    </div>
+                </div>
+
+                <div class="flex bg-slate-800 p-1 rounded-xl border border-white/5 shrink-0">
+                    <button onclick="tabDegistir('lisans')" id="btn-lisans" class="tab-btn active px-6 py-2 rounded-lg font-bold text-xs text-white">LİSANS</button>
+                    <button onclick="tabDegistir('onlisans')" id="btn-onlisans" class="tab-btn px-6 py-2 rounded-lg font-bold text-xs text-slate-400">ÖNLİSANS</button>
+                </div>
+            </div>
+
+            <div class="mt-4 flex flex-row justify-between items-center">
+                <div id="info" class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em]">Veriler Hazırlanıyor...</div>
+                <!-- İstediğin gibi Sıralama seçeneği (büyükten küçüğe dropdown) buradan kaldırıldı -->
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto px-4 mt-8">
+        <div id="sonuclar" class="glass-card rounded-[2rem] overflow-hidden shadow-2xl"></div>
+        <div id="loader" class="text-center py-20">
+            <div class="inline-block animate-spin rounded-full h-10 w-10 border-4 border-blue-500 border-t-transparent"></div>
+        </div>
+    </main>
+
+<script>
+    let db = { lisans: [], onlisans: [], sehirler: {} };
+    let currentMod = 'lisans';
+    let debounceTimer;
+
+    const TR_SEHIRLER = [
+        "ADANA", "ADIYAMAN", "AFYONKARAHISAR", "AGRI", "AMASYA", "ANKARA", "ANTALYA", "ARTVIN",
+        "AYDIN", "BALIKESIR", "BILECIK", "BINGOL", "BITLIS", "BOLU", "BURDUR", "BURSA", "CANAKKALE",
+        "CANKIRI", "CORUM", "DENIZLI", "DIYARBAKIR", "EDIRNE", "ELAZIG", "ERZINCAN", "ERZURUM",
+        "ESKISEHIR", "GAZIANTEP", "GIRESUN", "GUMUSHANE", "HAKKARI", "HATAY", "ISPARTA", "MERSIN",
+        "ISTANBUL", "IZMIR", "KARS", "KASTAMONU", "KAYSERI", "KIRKLARELI", "KIRSEHIR", "KOCAELI",
+        "KONYA", "KUTAHYA", "MALATYA", "MANISA", "KAHRAMANMARAS", "MARDIN", "MUGLA", "MUS",
+        "NEVSEHIR", "NIGDE", "ORDU", "RIZE", "SAKARYA", "SAMSUN", "SIIRT", "SINOP", "SIVAS",
+        "TEKIRDAG", "TOKAT", "TRABZON", "TUNCELI", "SANLIURFA", "USAK", "VAN", "YOZGAT", "ZONGULDAK",
+        "AKSARAY", "BAYBURT", "KARAMAN", "KIRIKKALE", "BATMAN", "SIRNAK", "BARTIN", "ARDAHAN",
+        "IGDIR", "YALOVA", "KARABUK", "KILIS", "GEBZE", "OSMANIYE", "DUZCE"
+    ];
+
+    function fixTurkishChars(str) {
+        if (!str) return "";
+        return str.toString()
+            .replace(/i/g, 'İ')
+            .replace(/ı/g, 'I')
+            .toUpperCase()
+            .replace(/Ğ/g, 'G')
+            .replace(/Ü/g, 'U')
+            .replace(/Ş/g, 'S')
+            .replace(/Ö/g, 'O')
+            .replace(/Ç/g, 'C')
+            .replace(/İ/g, 'I') 
+            .trim();
+    }
+
+    async function init() {
+        const infoBox = document.getElementById('info');
+        try {
+            infoBox.innerText = "Veriler işleniyor...";
+            const [resL, resO, resS] = await Promise.all([
+                fetch('lisans2.json').then(r => r.json()),
+                fetch('onlisans2.json').then(r => r.json()),
+                fetch('sehirler2.json').then(r => r.json())
+            ]);
+
+            db.sehirler = {};
+            for (let key in resS) {
+                db.sehirler[fixTurkishChars(key)] = resS[key];
+            }
+
+            db.lisans = resL;
+            db.onlisans = resO;
+
+            document.getElementById('loader').classList.add('hidden');
+            infoBox.innerText = "Sistem Hazır!";
+            ara();
+        } catch (err) {
+            infoBox.innerHTML = '<b class="text-red-500">Dosya yükleme hatası!</b>';
+        }
+    }
+
+    // Performans için Debounce (Geciktirici) Fonksiyonu
+    function araDebounced() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            ara();
+        }, 250); // Kullanıcı yazmayı bıraktıktan 250ms sonra çalışır
+    }
+
+    function ara() {
+        const q = document.getElementById('searchInput').value.toLocaleLowerCase('tr').trim();
+        const maxPuanValue = document.getElementById('puanInput').value.trim();
+        const maxSiraValue = document.getElementById('siraInput').value.trim();
+        const container = document.getElementById('sonuclar');
+        
+        const data = db[currentMod];
+
+        if (!data || !Array.isArray(data)) {
+            container.innerHTML = '<div class="p-20 text-center text-slate-500 italic">Veriler yükleniyor...</div>';
+            return;
+        }
+
+        let filtered = data.filter(item => {
+            if (!item || !item.uni || !item.bolum) return false;
+
+            let sKey = "";
+            let uniText = fixTurkishChars(item.uni);
+            let sehirText = item.sehir ? fixTurkishChars(item.sehir) : "";
+
+            if (sehirText && sehirText !== "BELIRTILMEMIS") {
+                sKey = sehirText;
+            } else {
+                const match = uniText.match(/\(([^)]+)\)/);
+                if (match) {
+                    sKey = fixTurkishChars(match[1]);
+                } else {
+                    sKey = TR_SEHIRLER.find(s => uniText.includes(s)) || "";
+                }
+            }
+
+            const matchText = q === "" || 
+                item.bolum.toString().toLocaleLowerCase('tr').includes(q) || 
+                item.uni.toString().toLocaleLowerCase('tr').includes(q) ||
+                sKey.toLocaleLowerCase('tr').includes(q) ||
+                sehirText.toLocaleLowerCase('tr').includes(q);
+
+            let matchSira = true;
+            if (maxSiraValue !== "") {
+                const userSira = parseInt(maxSiraValue.replace(/\./g, ''), 10);
+                let rawItemSira = item.sira ? item.sira.toString().replace(/\./g, '') : '';
+                const itemSira = parseInt(rawItemSira, 10);
+
+                if (!isNaN(userSira) && !isNaN(itemSira)) {
+                    matchSira = itemSira >= userSira;
+                } else {
+                    matchSira = false;
+                }
+            }
+
+            let matchPuan = true;
+            if (maxPuanValue !== "") {
+                const userPuan = parseFloat(maxPuanValue);
+                let rawItemPuan = item.puan ? item.puan.toString().replace(',', '.') : '';
+                const itemPuan = parseFloat(rawItemPuan);
+
+                if (!isNaN(userPuan) && !isNaN(itemPuan)) {
+                    matchPuan = itemPuan <= userPuan;
+                } else {
+                    matchPuan = false;
+                }
+            }
+
+            return matchText && matchSira && matchPuan;
+        });
+
+        // BAŞARI SIRASINA GÖRE DOĞAL KÜÇÜKTEN BÜYÜGE SIRALAMA (En iyi derece en üstte)
+        filtered.sort((a, b) => {
+            let sA = parseInt(a.sira ? a.sira.toString().replace(/\./g, '') : 9999999, 10) || 9999999;
+            let sB = parseInt(b.sira ? b.sira.toString().replace(/\./g, '') : 9999999, 10) || 9999999;
+            return sA - sB;
+        });
+
+        // 🚀 TARAYICIYI UÇURAN OPTİMİZASYON: Ekrana sadece en alakalı ilk 40 veriyi basıyoruz
+        filtered = filtered.slice(0, 40);
+
+        let html = "";
+        filtered.forEach(item => {
+            let sKey = "";
+            let uniText = fixTurkishChars(item.uni);
+            let sehirText = item.sehir ? fixTurkishChars(item.sehir) : "";
+
+            if (sehirText && sehirText !== "BELIRTILMEMIS") {
+                sKey = sehirText;
+            } else {
+                const match = uniText.match(/\(([^)]+)\)/);
+                if (match) {
+                    sKey = fixTurkishChars(match[1]);
+                } else {
+                    sKey = TR_SEHIRLER.find(s => uniText.includes(s)) || "";
+                }
+            }
+
+            if (!sKey) {
+                let kelimeler = uniText.split(" ");
+                if (kelimeler.length > 0 && !["T.C.", "SAĞLIK", "ULUSLARARASI", "DOĞU"].includes(kelimeler[0])) {
+                    sKey = kelimeler[0];
+                } else {
+                    sKey = "BİLİNMİYOR";
+                }
+            }
+
+            const sData = db.sehirler[sKey];
+            const yasamPct = sData ? Math.round(sData.yasam_ml_pct) : null;
+            const analizMetni = (sData && sData.analiz) ? sData.analiz : "Bu üniversite veya şehir için akademik/sosyal yaşam analizi henüz tanımlanmamıştır.";
+            
+            let colorClass = "border-slate-700 text-slate-500";
+            if(yasamPct >= 70) colorClass = "border-emerald-500 text-emerald-400";
+            else if(yasamPct >= 45) colorClass = "border-yellow-500 text-yellow-400";
+            else if(yasamPct > 0) colorClass = "border-rose-500 text-rose-400";
+
+            let rawPuan = item.puan ? parseFloat(item.puan.toString().replace(',', '.')) : null;
+            const displayPuan = (rawPuan && !isNaN(rawPuan)) ? rawPuan.toFixed(2) : '---';
+
+            let rawSira = item.sira ? parseInt(item.sira.toString().replace(/\./g, ''), 10) : null;
+            const displaySira = (rawSira && !isNaN(rawSira)) ? rawSira.toLocaleString('tr-TR') : '---';
+
+            let temizKont = item.kont ? item.kont.toString().replace('%', '') : '-';
+
+            html += `
+                <div class="result-item p-6 flex flex-col md:flex-row justify-between items-center gap-6 group">
+                    <div class="flex-1 w-full text-left">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="text-[9px] font-black bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded uppercase tracking-widest">${sKey}</span>
+                            <span class="text-[9px] font-black bg-slate-700 text-slate-400 px-2 py-0.5 rounded uppercase tracking-widest">${item.tur || (currentMod === 'lisans' ? 'SAY' : 'TYT')}</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">${item.bolum}</h3>
+                        <p class="text-sm text-slate-400 font-semibold mt-1 uppercase tracking-tight">${item.uni}</p>
+                    </div>
+                    
+                    <div class="flex items-center gap-6 w-full md:w-auto justify-between md:justify-end">
+                        <div class="flex flex-col items-center gap-1 tooltip-container shrink-0">
+                            <span class="text-[7px] text-slate-500 font-bold uppercase tracking-widest text-center">Yaşam Endeksi</span>
+                            <div class="city-score-circle ${colorClass}">
+                                ${yasamPct ? '%' + yasamPct : '-'}
+                            </div>
+                            <div class="tooltip-box shadow-2xl">
+                                <div class="flex justify-between items-center mb-2 border-b border-white/10 pb-2">
+                                    <span class="font-bold text-blue-400 uppercase text-[10px] tracking-wider">${sKey} ANALİZİ</span>
+                                    <span class="bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded font-bold text-[8px]">AI REHBER</span>
+                                </div>
+                                <p class="text-slate-200 italic leading-relaxed">
+                                    "${analizMetni}"
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="text-center min-w-[50px] hidden sm:block">
+                            <p class="text-[8px] text-slate-500 font-bold uppercase tracking-widest mb-1">Kontenjan</p>
+                            <p class="text-base font-bold text-slate-300">${temizKont}</p>
+                        </div>
+
+                        <div class="text-right min-w-[85px]">
+                            <p class="text-[8px] text-emerald-500 font-bold uppercase tracking-widest mb-1">Başarı Sırası</p>
+                            <p class="text-xl font-black text-emerald-400 tracking-tight">${displaySira}</p>
+                        </div>
+
+                        <div class="text-right min-w-[90px]">
+                            <p class="text-[8px] text-blue-500 font-bold uppercase tracking-widest mb-1">Taban Puan</p>
+                            <p class="text-2xl font-black text-white tracking-tighter">${displayPuan}</p>
+                        </div>
+                    </div>
+                </div>`;
+        });
+        container.innerHTML = html || '<div class="p-20 text-center text-slate-500 italic">Kriterlere uygun sonuç bulunamadı.</div>';
+    }
+
+    function tabDegistir(m) {
+        currentMod = m;
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active', 'text-white'));
+        document.getElementById('btn-' + m).classList.add('active', 'text-white');
+        ara();
+    }
+    
+    init();
+</script>
+</body>
+</html>
