@@ -10,6 +10,7 @@
         body { font-family: 'Plus Jakarta Sans', sans-serif; background: #0f172a; color: #f8fafc; }
         .glass-card { background: rgba(30, 41, 59, 0.6); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.05); }
         .tab-btn.active { background: #3b82f6; color: white; border-color: #3b82f6; }
+        .sub-tab-btn.active { background: #2563eb; color: white; border-color: #2563eb; }
         .result-item { border-bottom: 1px solid rgba(255, 255, 255, 0.05); transition: all 0.2s; }
         .result-item:hover { background: rgba(59, 130, 246, 0.15); transform: scale(1.002); }
         
@@ -90,9 +91,16 @@
                 </div>
             </div>
 
+            <div id="subTabsContainer" class="mt-4 flex flex-wrap gap-2 transition-all duration-300">
+                <button onclick="subTabDegistir('HEPSİ')" id="sub-btn-HEPSİ" class="sub-tab-btn active px-4 py-1.5 rounded-xl border border-white/10 text-xs font-semibold bg-slate-800 text-slate-300 hover:bg-slate-700 transition-colors">HEPSİ</button>
+                <button onclick="subTabDegistir('SAY')" id="sub-btn-SAY" class="sub-tab-btn px-4 py-1.5 rounded-xl border border-white/10 text-xs font-semibold bg-slate-800 text-slate-400 hover:bg-slate-700 transition-colors">SAYISAL</button>
+                <button onclick="subTabDegistir('EA')" id="sub-btn-EA" class="sub-tab-btn px-4 py-1.5 rounded-xl border border-white/10 text-xs font-semibold bg-slate-800 text-slate-400 hover:bg-slate-700 transition-colors">EŞİT AĞIRLIK</button>
+                <button onclick="subTabDegistir('SÖZ')" id="sub-btn-SÖZ" class="sub-tab-btn px-4 py-1.5 rounded-xl border border-white/10 text-xs font-semibold bg-slate-800 text-slate-400 hover:bg-slate-700 transition-colors">SÖZEL</button>
+                <button onclick="subTabDegistir('DİL')" id="sub-btn-DİL" class="sub-tab-btn px-4 py-1.5 rounded-xl border border-white/10 text-xs font-semibold bg-slate-800 text-slate-400 hover:bg-slate-700 transition-colors">DİL</button>
+            </div>
+
             <div class="mt-4 flex flex-row justify-between items-center">
                 <div id="info" class="text-[10px] font-bold text-slate-500 uppercase tracking-[0.2em]">Veriler Hazırlanıyor...</div>
-                <!-- İstediğin gibi Sıralama seçeneği (büyükten küçüğe dropdown) buradan kaldırıldı -->
             </div>
         </div>
     </header>
@@ -107,6 +115,7 @@
 <script>
     let db = { lisans: [], onlisans: [], sehirler: {} };
     let currentMod = 'lisans';
+    let currentSubMod = 'HEPSİ'; // SAY, EA, SÖZ, DİL filtreleri için
     let debounceTimer;
 
     const TR_SEHIRLER = [
@@ -141,9 +150,10 @@
         const infoBox = document.getElementById('info');
         try {
             infoBox.innerText = "Veriler işleniyor...";
+            // İstediğin gibi lisans4.json ve onlisans4.json dosyalarını çekiyoruz
             const [resL, resO, resS] = await Promise.all([
-                fetch('lisans2.json').then(r => r.json()),
-                fetch('onlisans2.json').then(r => r.json()),
+                fetch('lisans4.json').then(r => r.json()),
+                fetch('onlisans4.json').then(r => r.json()),
                 fetch('sehirler2.json').then(r => r.json())
             ]);
 
@@ -163,12 +173,11 @@
         }
     }
 
-    // Performans için Debounce (Geciktirici) Fonksiyonu
     function araDebounced() {
         clearTimeout(debounceTimer);
         debounceTimer = setTimeout(() => {
             ara();
-        }, 250); // Kullanıcı yazmayı bıraktıktan 250ms sonra çalışır
+        }, 250);
     }
 
     function ara() {
@@ -186,6 +195,11 @@
 
         let filtered = data.filter(item => {
             if (!item || !item.uni || !item.bolum) return false;
+
+            // Lisans butonlarında alt filtre (SAY, EA, SÖZ, DİL) seçildiyse eşleştirme yap
+            if (currentMod === 'lisans' && currentSubMod !== 'HEPSİ') {
+                if (fixTurkishChars(item.tur) !== fixTurkishChars(currentSubMod)) return false;
+            }
 
             let sKey = "";
             let uniText = fixTurkishChars(item.uni);
@@ -208,6 +222,7 @@
                 sKey.toLocaleLowerCase('tr').includes(q) ||
                 sehirText.toLocaleLowerCase('tr').includes(q);
 
+            // İstediğin mantık: Girilen sıralama değerinden aşağıya/geriye doğru listeleme (itemSira >= userSira)
             let matchSira = true;
             if (maxSiraValue !== "") {
                 const userSira = parseInt(maxSiraValue.replace(/\./g, ''), 10);
@@ -237,14 +252,13 @@
             return matchText && matchSira && matchPuan;
         });
 
-        // BAŞARI SIRASINA GÖRE DOĞAL KÜÇÜKTEN BÜYÜGE SIRALAMA (En iyi derece en üstte)
+        // Doğal başarı sırası düzeni (Küçükten büyüğe, en iyi derece yukarıda)
         filtered.sort((a, b) => {
             let sA = parseInt(a.sira ? a.sira.toString().replace(/\./g, '') : 9999999, 10) || 9999999;
             let sB = parseInt(b.sira ? b.sira.toString().replace(/\./g, '') : 9999999, 10) || 9999999;
             return sA - sB;
         });
 
-        // 🚀 TARAYICIYI UÇURAN OPTİMİZASYON: Ekrana sadece en alakalı ilk 40 veriyi basıyoruz
         filtered = filtered.slice(0, 40);
 
         let html = "";
@@ -290,12 +304,21 @@
 
             let temizKont = item.kont ? item.kont.toString().replace('%', '') : '-';
 
+            // Yeni JSON'dan gelen alanların kontrolü (Boşsa varsayılan değer atıyoruz)
+            let alanTuru = item.tur ? item.tur.toString().toUpperCase() : (currentMod === 'lisans' ? 'SAY' : 'TYT');
+            let egitimDili = item.dil ? item.dil.toString() : 'Türkçe';
+            let bursDurumu = item.burs ? item.burs.toString() : 'Ücretsiz';
+            let ogretimTuru = item.ogretim ? item.ogretim.toString() : 'Örgün Öğretim';
+
             html += `
                 <div class="result-item p-6 flex flex-col md:flex-row justify-between items-center gap-6 group">
                     <div class="flex-1 w-full text-left">
-                        <div class="flex items-center gap-2 mb-2">
+                        <div class="flex flex-wrap items-center gap-1.5 mb-2.5">
                             <span class="text-[9px] font-black bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded uppercase tracking-widest">${sKey}</span>
-                            <span class="text-[9px] font-black bg-slate-700 text-slate-400 px-2 py-0.5 rounded uppercase tracking-widest">${item.tur || (currentMod === 'lisans' ? 'SAY' : 'TYT')}</span>
+                            <span class="text-[9px] font-black bg-slate-700 text-slate-300 px-2 py-0.5 rounded uppercase tracking-widest">${alanTuru}</span>
+                            <span class="text-[9px] font-black bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded uppercase tracking-widest">${egitimDili}</span>
+                            <span class="text-[9px] font-black bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded uppercase tracking-widest">${bursDurumu}</span>
+                            <span class="text-[9px] font-black bg-purple-500/10 text-purple-400 px-2 py-0.5 rounded uppercase tracking-widest">${ogretimTuru}</span>
                         </div>
                         <h3 class="text-xl font-bold text-white group-hover:text-blue-400 transition-colors">${item.bolum}</h3>
                         <p class="text-sm text-slate-400 font-semibold mt-1 uppercase tracking-tight">${item.uni}</p>
@@ -342,6 +365,27 @@
         currentMod = m;
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active', 'text-white'));
         document.getElementById('btn-' + m).classList.add('active', 'text-white');
+        
+        const subTabs = document.getElementById('subTabsContainer');
+        if (m === 'onlisans') {
+            subTabs.classList.add('hidden'); // Önlisans seçildiğinde alt butonları gizle
+            currentSubMod = 'HEPSİ';
+        } else {
+            subTabs.classList.remove('hidden'); // Lisans seçildiğinde alt butonları göster
+        }
+        ara();
+    }
+
+    function subTabDegistir(sm) {
+        currentSubMod = sm;
+        document.querySelectorAll('.sub-tab-btn').forEach(b => {
+            b.classList.remove('active', 'text-white', 'bg-blue-600');
+            b.classList.add('text-slate-400', 'bg-slate-800');
+        });
+        
+        const activeBtn = document.getElementById('sub-btn-' + sm);
+        activeBtn.classList.add('active', 'text-white', 'bg-blue-600');
+        activeBtn.classList.remove('text-slate-400', 'bg-slate-800');
         ara();
     }
     
