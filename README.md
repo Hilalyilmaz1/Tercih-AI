@@ -10,7 +10,7 @@
 
 Tercih AI is an innovative web application based on **Artificial Intelligence & Mathematical Optimization** that helps university candidates during their preference periods. It allows students to simultaneously evaluate academic criteria (admission scores, rankings, quotas, etc.) alongside city-based socio-economic life quality metrics (rent index, transportation fees, social activities).
 
-🔗 **Live Demo:** [View Live Site (https://www.tercih-ai.com/)](#)
+🔗 **Live Demo:** [View Live Site (tercih-ai.com)](#)
 
 ---
 
@@ -76,7 +76,7 @@ Initially, a set of heuristic weights was defined based on student surveys and e
 | Coastal Status | 0.10 |
 
 The base score was calculated as:
-$$\text{yasam\_orijinal} = \sum_{i} w_i \cdot x_i$$
+$$\text{yasam-orijinal} = \sum_{i} w_i \cdot x_i$$
 
 ### 5. Hybrid-ML Optimization
 The goal is to optimize the weight vector ($w_i$) using mathematical programming to **maximize the number of student-friendly cities**. A city is considered student-friendly if its index score is above the threshold of $0.5$ (or 50%).
@@ -234,7 +234,7 @@ Optimizasyon öncesi, uzman görüşlerine ve öğrenci anketlerine dayanarak be
 | Deniz Kıyısı | 0.10 |
 
 Bu temel formül ile ham puanlar şu şekilde hesaplanmıştır:
-$$\text{yasam\_orijinal} = \sum_{i} w_i \cdot x_i$$
+$$\text{yasam-orijinal} = \sum_{i} w_i \cdot x_i$$
 
 ### 5. Hibrit-ML Optimizasyonu
 Amacımız, ağırlık ($w_i$) kombinasyonunu yapay zeka/matematiksel optimizasyon kullanarak güncelleyip, **öğrenci dostu şehirlerin sayısını maksimuma çıkarmaktır**. Hedef, yaşam puanı eşik değer olan $0.5$ (yani %50) üzerinde kalan şehirlerin sayısını en üst düzeye ulaştırmaktır.
