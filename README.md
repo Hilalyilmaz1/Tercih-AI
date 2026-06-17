@@ -10,7 +10,7 @@
 
 Tercih AI is an innovative web application based on **Artificial Intelligence & Mathematical Optimization** that helps university candidates during their preference periods. It allows students to simultaneously evaluate academic criteria (admission scores, rankings, quotas, etc.) alongside city-based socio-economic life quality metrics (rent index, transportation fees, social activities).
 
-🔗 **Live Demo:** [View Live Site (tercih-ai.com)](#)
+🔗 **Live Demo:** [tercih-ai.com](https://www.tercih-ai.com/)
 
 ---
 
@@ -168,7 +168,7 @@ This project is licensed under the **MIT License**. See the `LICENSE` file for d
 
 Tercih AI, üniversite adaylarının tercih dönemlerinde hem akademik kriterleri (puan, başarı sırası, kontenjan vb.) hem de şehir bazlı sosyo-ekonomik yaşam kalitesini (kira, ulaşım, sosyal imkanlar) birlikte değerlendirebilmelerini sağlayan, **Yapay Zeka / Matematiksel Optimizasyon** tabanlı yenilikçi bir web uygulamasıdır.
 
-🔗 **Canlı Demo:** [Projeyi Canlıda Görüntüle (https://www.tercih-ai.com/)](#)
+🔗 **Canlı Demo:** [tercih-ai.com](https://www.tercih-ai.com/)
 
 ---
 
