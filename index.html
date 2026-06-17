@@ -62,6 +62,44 @@
 </head>
 <body class="min-h-screen pb-20">
 
+    <div id="welcomeModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-xl transition-all duration-500 opacity-100 visible">
+        <div class="glass-card max-w-xl w-full rounded-[2rem] p-8 border border-blue-500/30 shadow-2xl relative overflow-hidden bg-slate-900/90 text-center animate-fade-in">
+            <div class="absolute -top-12 -left-12 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl"></div>
+            <div class="absolute -bottom-12 -right-12 w-32 h-32 bg-purple-500/10 rounded-full blur-3xl"></div>
+            
+            <div class="mb-6">
+                <span class="text-xs font-black tracking-[0.3em] text-amber-500 bg-amber-500/10 px-4 py-1.5 rounded-full uppercase inline-block mb-3 border border-amber-500/20 shadow-lg">
+                    ⚠️ BU BİR REKLAM DEĞİLDİR UYARIDIR LÜTFEN OKUYUNUZ
+                </span>
+                <h2 class="text-2xl font-black text-white tracking-tight mt-2">
+                    YASAM ENDEKSİ MODELİ HAKKINDA
+                </h2>
+            </div>
+
+            <div class="text-slate-300 text-sm leading-relaxed text-justify space-y-4 px-2 my-6 font-medium">
+                <p>
+                    Bu sitedeki yapay zeka, öğrenciler için şehirlerdeki yaşanılabilirliğin yüzdesini ölçmektedir. Türkiye'nin 81 iline ait kapsamlı veriler titizlikle toplanmıştır.
+                </p>
+                <p>
+                    Verilerimiz; <span class="text-blue-400 font-semibold">kira fiyatları, otobüs/ulaşım ücretleri, yemek fiyatları, kütüphane sayısı, denize kıyısı olması, şehirdeki tiyatro ve konser sayıları</span> gibi öğrencileri doğrudan etkileyen kritik faktörler göz önünde bulundurularak hazırlanmıştır.
+                </p>
+                <p>
+                    Tüm bu parametrelere belirli katsayılar verilerek matematiksel bir formüle dökülmüş ve **kendi geliştirdiğimiz özel modelimiz ile eğitilerek** doğruluğu optimize edilmiştir.
+                </p>
+            </div>
+
+            <div class="mt-8 pt-4 border-t border-white/5 flex flex-col items-center justify-center min-h-[60px]">
+                <div id="modalTimer" class="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-2">
+                    <span class="inline-block animate-spin rounded-full h-3.5 w-3.5 border-2 border-blue-500 border-t-transparent"></span>
+                    Kapatma butonu <span id="countdownText" class="text-blue-400 text-sm font-black mx-1">5</span> saniye sonra aktif olacaktır...
+                </div>
+                <button id="closeModalBtn" onclick="modalikapat()" class="hidden w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold text-sm py-4 px-6 rounded-2xl shadow-xl shadow-blue-500/20 transition-all duration-300 transform hover:scale-[1.02] uppercase tracking-wider">
+                    Anladım, Sayfaya Geç
+                </button>
+            </div>
+        </div>
+    </div>
+
     <header class="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-xl border-b border-white/10 py-6 px-4">
         <div class="max-w-5xl mx-auto">
             <div class="flex flex-col lg:flex-row gap-4 items-center">
@@ -115,7 +153,7 @@
 <script>
     let db = { lisans: [], onlisans: [], sehirler: {} };
     let currentMod = 'lisans';
-    let currentSubMod = 'HEPSİ'; // SAY, EA, SÖZ, DİL filtreleri için
+    let currentSubMod = 'HEPSİ'; 
     let debounceTimer;
 
     const TR_SEHIRLER = [
@@ -130,6 +168,32 @@
         "AKSARAY", "BAYBURT", "KARAMAN", "KIRIKKALE", "BATMAN", "SIRNAK", "BARTIN", "ARDAHAN",
         "IGDIR", "YALOVA", "KARABUK", "KILIS", "GEBZE", "OSMANIYE", "DUZCE"
     ];
+
+    // MODAL ZAMANLAYICI MANTIĞI
+    function startModalTimer() {
+        let timeLeft = 5;
+        const countdownText = document.getElementById('countdownText');
+        const modalTimer = document.getElementById('modalTimer');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+
+        const interval = setInterval(() => {
+            timeLeft--;
+            if (countdownText) countdownText.innerText = timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+                if (modalTimer) modalTimer.classList.add('hidden');
+                if (closeModalBtn) closeModalBtn.classList.remove('hidden');
+            }
+        }, 1000);
+    }
+
+    function modalikapat() {
+        const modal = document.getElementById('welcomeModal');
+        modal.classList.replace('opacity-100', 'opacity-0');
+        modal.classList.replace('visible', 'invisible');
+        setTimeout(() => modal.remove(), 500); // 500ms animasyon sonrası DOM'dan kaldırır
+    }
 
     function fixTurkishChars(str) {
         if (!str) return "";
@@ -147,10 +211,10 @@
     }
 
     async function init() {
+        startModalTimer(); // Sayfa açılır açılmaz geri sayımı başlat
         const infoBox = document.getElementById('info');
         try {
             infoBox.innerText = "Veriler işleniyor...";
-            // İstediğin gibi lisans4.json ve onlisans4.json dosyalarını çekiyoruz
             const [resL, resO, resS] = await Promise.all([
                 fetch('lisans4.json').then(r => r.json()),
                 fetch('onlisans4.json').then(r => r.json()),
@@ -185,6 +249,7 @@
         const maxPuanValue = document.getElementById('puanInput').value.trim();
         const maxSiraValue = document.getElementById('siraInput').value.trim();
         const container = document.getElementById('sonuclar');
+        const infoBox = document.getElementById('info');
         
         const data = db[currentMod];
 
@@ -196,7 +261,6 @@
         let filtered = data.filter(item => {
             if (!item || !item.uni || !item.bolum) return false;
 
-            // Lisans butonlarında alt filtre (SAY, EA, SÖZ, DİL) seçildiyse eşleştirme yap
             if (currentMod === 'lisans' && currentSubMod !== 'HEPSİ') {
                 if (fixTurkishChars(item.tur) !== fixTurkishChars(currentSubMod)) return false;
             }
@@ -222,44 +286,57 @@
                 sKey.toLocaleLowerCase('tr').includes(q) ||
                 sehirText.toLocaleLowerCase('tr').includes(q);
 
-            // İstediğin mantık: Girilen sıralama değerinden aşağıya/geriye doğru listeleme (itemSira >= userSira)
             let matchSira = true;
             if (maxSiraValue !== "") {
                 const userSira = parseInt(maxSiraValue.replace(/\./g, ''), 10);
-                let rawItemSira = item.sira ? item.sira.toString().replace(/\./g, '') : '';
-                const itemSira = parseInt(rawItemSira, 10);
-
-                if (!isNaN(userSira) && !isNaN(itemSira)) {
-                    matchSira = itemSira >= userSira;
+                let rawItemSira = item.sira ? item.sira.toString().replace(/\./g, '').trim() : '';
+                
+                if (rawItemSira === '' || rawItemSira === '-' || rawItemSira === '---') {
+                    matchSira = true;
                 } else {
-                    matchSira = false;
+                    const itemSira = parseInt(rawItemSira, 10);
+                    if (!isNaN(userSira) && !isNaN(itemSira)) {
+                        matchSira = itemSira >= userSira;
+                    } else {
+                        matchSira = true; 
+                    }
                 }
             }
 
             let matchPuan = true;
             if (maxPuanValue !== "") {
                 const userPuan = parseFloat(maxPuanValue);
-                let rawItemPuan = item.puan ? item.puan.toString().replace(',', '.') : '';
-                const itemPuan = parseFloat(rawItemPuan);
-
-                if (!isNaN(userPuan) && !isNaN(itemPuan)) {
-                    matchPuan = itemPuan <= userPuan;
+                let rawItemPuan = item.puan ? item.puan.toString().replace(',', '.').trim() : '';
+                
+                if (rawItemPuan === '' || rawItemPuan === '-' || rawItemPuan === '---') {
+                    matchPuan = true;
                 } else {
-                    matchPuan = false;
+                    const itemPuan = parseFloat(rawItemPuan);
+                    if (!isNaN(userPuan) && !isNaN(itemPuan)) {
+                        matchPuan = itemPuan <= userPuan;
+                    } else {
+                        matchPuan = true;
+                    }
                 }
             }
 
             return matchText && matchSira && matchPuan;
         });
 
-        // Doğal başarı sırası düzeni (Küçükten büyüğe, en iyi derece yukarıda)
         filtered.sort((a, b) => {
             let sA = parseInt(a.sira ? a.sira.toString().replace(/\./g, '') : 9999999, 10) || 9999999;
             let sB = parseInt(b.sira ? b.sira.toString().replace(/\./g, '') : 9999999, 10) || 9999999;
             return sA - sB;
         });
 
-        filtered = filtered.slice(0, 40);
+        const filtreAktifMi = (q !== "" || maxSiraValue !== "" || maxPuanValue !== "" || (currentMod === 'lisans' && currentSubMod !== 'HEPSİ'));
+        
+        if (!filtreAktifMi) {
+            filtered = filtered.slice(0, 40);
+            infoBox.innerText = `Sistem Hazır! (İlk ${filtered.length} Kayıt Listeleniyor)`;
+        } else {
+            infoBox.innerText = `Bulunan Sonuç Sayısı: ${filtered.length}`;
+        }
 
         let html = "";
         filtered.forEach(item => {
@@ -288,7 +365,7 @@
             }
 
             const sData = db.sehirler[sKey];
-            const yasamPct = sData ? Math.round(sData.yasam_ml_pct) : null;
+            const yasamPct = sData ? Math.round(sData.yarom_ml_pct || sData.yasam_ml_pct) : null;
             const analizMetni = (sData && sData.analiz) ? sData.analiz : "Bu üniversite veya şehir için akademik/sosyal yaşam analizi henüz tanımlanmamıştır.";
             
             let colorClass = "border-slate-700 text-slate-500";
@@ -302,9 +379,9 @@
             let rawSira = item.sira ? parseInt(item.sira.toString().replace(/\./g, ''), 10) : null;
             const displaySira = (rawSira && !isNaN(rawSira)) ? rawSira.toLocaleString('tr-TR') : '---';
 
-            let temizKont = item.kont ? item.kont.toString().replace('%', '') : '-';
+            let temizKont = item.kont ? item.kont.toString().replace('%', '').trim() : '';
+            let displayDoluluk = (temizKont !== '' && temizKont !== '-') ? `%${temizKont}` : '---';
 
-            // Yeni JSON'dan gelen alanların kontrolü (Boşsa varsayılan değer atıyoruz)
             let alanTuru = item.tur ? item.tur.toString().toUpperCase() : (currentMod === 'lisans' ? 'SAY' : 'TYT');
             let egitimDili = item.dil ? item.dil.toString() : 'Türkçe';
             let bursDurumu = item.burs ? item.burs.toString() : 'Ücretsiz';
@@ -341,9 +418,9 @@
                             </div>
                         </div>
 
-                        <div class="text-center min-w-[50px] hidden sm:block">
-                            <p class="text-[8px] text-slate-500 font-bold uppercase tracking-widest mb-1">Kontenjan</p>
-                            <p class="text-base font-bold text-slate-300">${temizKont}</p>
+                        <div class="text-center min-w-[70px] hidden sm:block">
+                            <p class="text-[8px] text-slate-500 font-bold uppercase tracking-widest mb-1">Doluluk Oranı</p>
+                            <p class="text-base font-bold text-slate-300">${displayDoluluk}</p>
                         </div>
 
                         <div class="text-right min-w-[85px]">
@@ -368,10 +445,10 @@
         
         const subTabs = document.getElementById('subTabsContainer');
         if (m === 'onlisans') {
-            subTabs.classList.add('hidden'); // Önlisans seçildiğinde alt butonları gizle
+            subTabs.classList.add('hidden'); 
             currentSubMod = 'HEPSİ';
         } else {
-            subTabs.classList.remove('hidden'); // Lisans seçildiğinde alt butonları göster
+            subTabs.classList.remove('hidden'); 
         }
         ara();
     }
