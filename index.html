@@ -247,12 +247,12 @@
                         </div>
                         <div>
                             <input type="text" id="siraInput" oninput="araDebounced()" 
-                                placeholder="Maks. Sıralama (Örn: 230.360)" 
+                                placeholder="Sıralamanız (Örn: 230.360)" 
                                 class="w-full bg-slate-800 border border-white/10 p-3.5 md:p-4 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 text-white text-sm transition-all shadow-2xl">
                         </div>
                         <div>
                             <input type="number" id="puanInput" oninput="araDebounced()" step="any"
-                                placeholder="Maks. Puan (Örn: 380)" 
+                                placeholder="Puanınız (Örn: 380)" 
                                 class="w-full bg-slate-800 border border-white/10 p-3.5 md:p-4 rounded-2xl outline-none focus:ring-2 focus:ring-blue-500 text-white text-sm transition-all shadow-2xl [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none">
                         </div>
                     </div>
@@ -548,7 +548,7 @@
                     if (item.sira === '' || item.sira === '-' || item.sira === '---' || !item.sira) {
                         // match
                     } else {
-                        if (item.siraParsed > userSira) return false;
+                        if (item.siraParsed < userSira) return false;
                     }
                 }
             }
