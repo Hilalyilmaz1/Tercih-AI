@@ -294,6 +294,9 @@
     let currentSubMod = 'HEPSİ'; 
     let debounceTimer;
     let isFilterVisible = true;
+    let visibleCount = 100;
+    let filteredResults = [];
+    let observer;
 
     const TR_SEHIRLER = [
         "ADANA", "ADIYAMAN", "AFYONKARAHISAR", "AGRI", "AMASYA", "ANKARA", "ANTALYA", "ARTVIN",
@@ -374,140 +377,15 @@
             .trim();
     }
 
-    async function init() {
-        startModalTimer();
-        const infoBox = document.getElementById('info');
-        try {
-            infoBox.innerText = "Veriler işleniyor...";
-            const [resL, resO, resS] = await Promise.all([
-                fetch('lisans4.json').then(r => r.json()),
-                fetch('onlisans4.json').then(r => r.json()),
-                fetch('sehirler2.json').then(r => r.json())
-            ]);
+    function preprocessData(data, isLisans) {
+        if (!Array.isArray(data)) return [];
+        return data.map(item => {
+            if (!item || !item.uni || !item.bolum) return null;
 
-            db.sehirler = {};
-            for (let key in resS) {
-                db.sehirler[fixTurkishChars(key)] = resS[key];
-            }
-
-            db.lisans = resL;
-            db.onlisans = resO;
-
-            document.getElementById('loader').classList.add('hidden');
-            infoBox.innerText = "Sistem Hazır!";
-            ara();
-        } catch (err) {
-            infoBox.innerHTML = '<b class="text-red-500">Dosya yükleme hatası!</b>';
-        }
-    }
-
-    function araDebounced() {
-        clearTimeout(debounceTimer);
-        debounceTimer = setTimeout(() => {
-            ara();
-        }, 250);
-    }
-
-    function ara() {
-        const q = document.getElementById('searchInput').value.toLocaleLowerCase('tr').trim();
-        const maxPuanValue = document.getElementById('puanInput').value.trim();
-        const maxSiraValue = document.getElementById('siraInput').value.trim();
-        const container = document.getElementById('sonuclar');
-        const infoBox = document.getElementById('info');
-        
-        const data = db[currentMod];
-
-        if (!data || !Array.isArray(data)) {
-            container.innerHTML = '<div class="p-20 text-center text-slate-500 italic">Veriler yükleniyor...</div>';
-            return;
-        }
-
-        let filtered = data.filter(item => {
-            if (!item || !item.uni || !item.bolum) return false;
-
-            if (currentMod === 'lisans' && currentSubMod !== 'HEPSİ') {
-                if (fixTurkishChars(item.tur) !== fixTurkishChars(currentSubMod)) return false;
-            }
+            let sehirText = item.sehir ? fixTurkishChars(item.sehir) : "";
+            let uniText = fixTurkishChars(item.uni);
 
             let sKey = "";
-            let uniText = fixTurkishChars(item.uni);
-            let sehirText = item.sehir ? fixTurkishChars(item.sehir) : "";
-
-            if (sehirText && sehirText !== "BELIRTILMEMIS") {
-                sKey = sehirText;
-            } else {
-                const match = uniText.match(/\(([^)]+)\)/);
-                if (match) {
-                    sKey = fixTurkishChars(match[1]);
-                } else {
-                    sKey = TR_SEHIRLER.find(s => uniText.includes(s)) || "";
-                }
-            }
-
-            const matchText = q === "" || 
-                item.bolum.toString().toLocaleLowerCase('tr').includes(q) || 
-                item.uni.toString().toLocaleLowerCase('tr').includes(q) ||
-                sKey.toLocaleLowerCase('tr').includes(q) ||
-                sehirText.toLocaleLowerCase('tr').includes(q);
-
-            let matchSira = true;
-            if (maxSiraValue !== "") {
-                const userSira = parseInt(maxSiraValue.replace(/\./g, ''), 10);
-                let rawItemSira = item.sira ? item.sira.toString().replace(/\./g, '').trim() : '';
-                
-                if (rawItemSira === '' || rawItemSira === '-' || rawItemSira === '---') {
-                    matchSira = true;
-                } else {
-                    const itemSira = parseInt(rawItemSira, 10);
-                    if (!isNaN(userSira) && !isNaN(itemSira)) {
-                        matchSira = itemSira >= userSira;
-                    } else {
-                        matchSira = true; 
-                    }
-                }
-            }
-
-            let matchPuan = true;
-            if (maxPuanValue !== "") {
-                const userPuan = parseFloat(maxPuanValue);
-                let rawItemPuan = item.puan ? item.puan.toString().replace(',', '.').trim() : '';
-                
-                if (rawItemPuan === '' || rawItemPuan === '-' || rawItemPuan === '---') {
-                    matchPuan = true;
-                } else {
-                    const itemPuan = parseFloat(rawItemPuan);
-                    if (!isNaN(userPuan) && !isNaN(itemPuan)) {
-                        matchPuan = itemPuan <= userPuan;
-                    } else {
-                        matchPuan = true;
-                    }
-                }
-            }
-
-            return matchText && matchSira && matchPuan;
-        });
-
-        filtered.sort((a, b) => {
-            let sA = parseInt(a.sira ? a.sira.toString().replace(/\./g, '') : 9999999, 10) || 9999999;
-            let sB = parseInt(b.sira ? b.sira.toString().replace(/\./g, '') : 9999999, 10) || 9999999;
-            return sA - sB;
-        });
-
-        const filtreAktifMi = (q !== "" || maxSiraValue !== "" || maxPuanValue !== "" || (currentMod === 'lisans' && currentSubMod !== 'HEPSİ'));
-        
-        if (!filtreAktifMi) {
-            filtered = filtered.slice(0, 40);
-            infoBox.innerText = `Sistem Hazır! (İlk ${filtered.length} Kayıt Listeleniyor)`;
-        } else {
-            infoBox.innerText = `Bulunan Sonuç Sayısı: ${filtered.length}`;
-        }
-
-        let html = "";
-        filtered.forEach(item => {
-            let sKey = "";
-            let uniText = fixTurkishChars(item.uni);
-            let sehirText = item.sehir ? fixTurkishChars(item.sehir) : "";
-
             if (sehirText && sehirText !== "BELIRTILMEMIS") {
                 sKey = sehirText;
             } else {
@@ -533,33 +411,186 @@
             const analizMetni = (sData && sData.analiz) ? sData.analiz : "Bu üniversite veya şehir için akademik/sosyal yaşam analizi henüz tanımlanmamıştır.";
             
             let colorClass = "border-slate-700 text-slate-500";
-            if(yasamPct >= 70) colorClass = "border-emerald-500 text-emerald-400";
-            else if(yasamPct >= 45) colorClass = "border-yellow-500 text-yellow-400";
-            else if(yasamPct > 0) colorClass = "border-rose-500 text-rose-400";
+            if (yasamPct >= 70) colorClass = "border-emerald-500 text-emerald-400";
+            else if (yasamPct >= 45) colorClass = "border-yellow-500 text-yellow-400";
+            else if (yasamPct > 0) colorClass = "border-rose-500 text-rose-400";
 
             let rawPuan = item.puan ? parseFloat(item.puan.toString().replace(',', '.')) : null;
             const displayPuan = (rawPuan && !isNaN(rawPuan)) ? rawPuan.toFixed(2) : '---';
+            const puanParsed = (rawPuan && !isNaN(rawPuan)) ? rawPuan : null;
 
             let rawSira = item.sira ? parseInt(item.sira.toString().replace(/\./g, ''), 10) : null;
             const displaySira = (rawSira && !isNaN(rawSira)) ? rawSira.toLocaleString('tr-TR') : '---';
+            const siraParsed = (rawSira && !isNaN(rawSira)) ? rawSira : 9999999;
 
             let temizKont = item.kont ? item.kont.toString().replace('%', '').trim() : '';
             let displayDoluluk = (temizKont !== '' && temizKont !== '-') ? `%${temizKont}` : '---';
 
-            let alanTuru = item.tur ? item.tur.toString().toUpperCase() : (currentMod === 'lisans' ? 'SAY' : 'TYT');
+            let alanTuru = item.tur ? item.tur.toString().toUpperCase() : (isLisans ? 'SAY' : 'TYT');
+            let alanTuruFixed = fixTurkishChars(item.tur);
             let egitimDili = item.dil ? item.dil.toString() : 'Türkçe';
             let bursDurumu = item.burs ? item.burs.toString() : 'Ücretsiz';
             let ogretimTuru = item.ogretim ? item.ogretim.toString() : 'Örgün Öğretim';
 
+            // Lowercased search terms for rapid query checking
+            let uniSearch = uniText.toLocaleLowerCase('tr');
+            let bolumSearch = item.bolum.toString().toLocaleLowerCase('tr');
+            let sehirSearch = sehirText.toLocaleLowerCase('tr');
+            let sKeySearch = sKey.toLocaleLowerCase('tr');
+
+            return {
+                ...item,
+                sKey,
+                yasamPct,
+                analizMetni,
+                colorClass,
+                displayPuan,
+                puanParsed,
+                displaySira,
+                siraParsed,
+                displayDoluluk,
+                alanTuru,
+                alanTuruFixed,
+                egitimDili,
+                bursDurumu,
+                ogretimTuru,
+                uniSearch,
+                bolumSearch,
+                sehirSearch,
+                sKeySearch
+            };
+        }).filter(Boolean);
+    }
+
+    async function init() {
+        startModalTimer();
+        const infoBox = document.getElementById('info');
+        try {
+            infoBox.innerText = "Veriler işleniyor...";
+            const [resL, resO, resS] = await Promise.all([
+                fetch('lisans4.json').then(r => r.json()),
+                fetch('onlisans4.json').then(r => r.json()),
+                fetch('sehirler2.json').then(r => r.json())
+            ]);
+
+            db.sehirler = {};
+            for (let key in resS) {
+                db.sehirler[fixTurkishChars(key)] = resS[key];
+            }
+
+            db.lisans = preprocessData(resL, true);
+            db.onlisans = preprocessData(resO, false);
+
+            document.getElementById('loader').classList.add('hidden');
+            infoBox.innerText = "Sistem Hazır!";
+            ara(true);
+        } catch (err) {
+            infoBox.innerHTML = '<b class="text-red-500">Dosya yükleme hatası!</b>';
+        }
+    }
+
+    function araDebounced() {
+        clearTimeout(debounceTimer);
+        debounceTimer = setTimeout(() => {
+            ara(true);
+        }, 350);
+    }
+
+    function ara(resetCount = true) {
+        if (resetCount) {
+            visibleCount = 100;
+        }
+
+        const q = document.getElementById('searchInput').value.toLocaleLowerCase('tr').trim();
+        const maxPuanValue = document.getElementById('puanInput').value.trim();
+        const maxSiraValue = document.getElementById('siraInput').value.trim();
+        const container = document.getElementById('sonuclar');
+        const infoBox = document.getElementById('info');
+        
+        const data = db[currentMod];
+
+        if (!data || !Array.isArray(data)) {
+            container.innerHTML = '<div class="p-20 text-center text-slate-500 italic">Veriler yükleniyor...</div>';
+            return;
+        }
+
+        const currentSubModFixed = fixTurkishChars(currentSubMod);
+
+        let filtered = data.filter(item => {
+            if (currentMod === 'lisans' && currentSubMod !== 'HEPSİ') {
+                if (item.alanTuruFixed !== currentSubModFixed) return false;
+            }
+
+            const matchText = q === "" || 
+                item.bolumSearch.includes(q) || 
+                item.uniSearch.includes(q) ||
+                item.sKeySearch.includes(q) ||
+                item.sehirSearch.includes(q);
+
+            if (!matchText) return false;
+
+            if (maxSiraValue !== "") {
+                const userSira = parseInt(maxSiraValue.replace(/\./g, ''), 10);
+                if (!isNaN(userSira)) {
+                    if (item.sira === '' || item.sira === '-' || item.sira === '---' || !item.sira) {
+                        // match
+                    } else {
+                        if (item.siraParsed > userSira) return false;
+                    }
+                }
+            }
+
+            if (maxPuanValue !== "") {
+                const userPuan = parseFloat(maxPuanValue);
+                if (!isNaN(userPuan)) {
+                    if (item.puan === '' || item.puan === '-' || item.puan === '---' || !item.puan) {
+                        // match
+                    } else {
+                        if (item.puanParsed > userPuan) return false;
+                    }
+                }
+            }
+
+            return true;
+        });
+
+        filtered.sort((a, b) => a.siraParsed - b.siraParsed);
+
+        filteredResults = filtered;
+        renderFilteredResults();
+    }
+
+    function renderFilteredResults() {
+        const container = document.getElementById('sonuclar');
+        const infoBox = document.getElementById('info');
+        
+        const totalCount = filteredResults.length;
+        const sliceToShow = filteredResults.slice(0, visibleCount);
+
+        const filtreAktifMi = (
+            document.getElementById('searchInput').value.trim() !== "" || 
+            document.getElementById('puanInput').value.trim() !== "" || 
+            document.getElementById('siraInput').value.trim() !== "" || 
+            (currentMod === 'lisans' && currentSubMod !== 'HEPSİ')
+        );
+        
+        if (!filtreAktifMi) {
+            infoBox.innerText = `Sistem Hazır! (İlk ${sliceToShow.length} / ${totalCount} Kayıt Listeleniyor)`;
+        } else {
+            infoBox.innerText = `Bulunan Sonuç Sayısı: ${totalCount} (Gösterilen: ${sliceToShow.length})`;
+        }
+
+        let html = "";
+        sliceToShow.forEach(item => {
             html += `
                 <div class="result-item p-5 md:p-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-5 group">
                     <div class="flex-1 w-full text-left">
                         <div class="flex flex-wrap items-center gap-1.5 mb-2">
-                            <span class="text-[9px] font-black bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded uppercase tracking-widest">${sKey}</span>
-                            <span class="text-[9px] font-black bg-slate-700 text-slate-300 px-2 py-0.5 rounded uppercase tracking-widest">${alanTuru}</span>
-                            <span class="text-[9px] font-black bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded uppercase tracking-widest">${egitimDili}</span>
-                            <span class="text-[9px] font-black bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded uppercase tracking-widest">${bursDurumu}</span>
-                            <span class="text-[9px] font-black bg-purple-500/10 text-purple-400 px-2 py-0.5 rounded uppercase tracking-widest">${ogretimTuru}</span>
+                            <span class="text-[9px] font-black bg-blue-500/10 text-blue-400 px-2 py-0.5 rounded uppercase tracking-widest">${item.sKey}</span>
+                            <span class="text-[9px] font-black bg-slate-700 text-slate-300 px-2 py-0.5 rounded uppercase tracking-widest">${item.alanTuru}</span>
+                            <span class="text-[9px] font-black bg-emerald-500/10 text-emerald-400 px-2 py-0.5 rounded uppercase tracking-widest">${item.egitimDili}</span>
+                            <span class="text-[9px] font-black bg-amber-500/10 text-amber-400 px-2 py-0.5 rounded uppercase tracking-widest">${item.bursDurumu}</span>
+                            <span class="text-[9px] font-black bg-purple-500/10 text-purple-400 px-2 py-0.5 rounded uppercase tracking-widest">${item.ogretimTuru}</span>
                         </div>
                         <h3 class="text-lg md:text-xl font-bold text-white group-hover:text-blue-400 transition-colors line-clamp-2 md:line-clamp-none">${item.bolum}</h3>
                         <p class="text-xs md:text-sm text-slate-400 font-semibold mt-1 uppercase tracking-tight">${item.uni}</p>
@@ -568,38 +599,77 @@
                     <div class="grid grid-cols-2 sm:grid-cols-4 md:flex md:items-center md:gap-6 w-full md:w-auto border-t border-white/5 pt-4 md:border-none md:pt-0 gap-4">
                         <div class="flex flex-col items-center gap-1 tooltip-container shrink-0 justify-self-start md:justify-self-auto">
                             <span class="text-[8px] text-slate-500 font-bold uppercase tracking-widest text-center">Yaşam Endeksi</span>
-                            <div class="city-score-circle ${colorClass}">
-                                ${yasamPct ? '%' + yasamPct : '-'}
+                            <div class="city-score-circle ${item.colorClass}">
+                                ${item.yasamPct ? '%' + item.yasamPct : '-'}
                             </div>
                             <div class="tooltip-box">
                                 <div class="flex justify-between items-center mb-2 border-b border-white/10 pb-2">
-                                    <span class="font-bold text-blue-400 uppercase text-[10px] tracking-wider">${sKey} ANALİZİ</span>
+                                    <span class="font-bold text-blue-400 uppercase text-[10px] tracking-wider">${item.sKey} ANALİZİ</span>
                                     <span class="bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded font-bold text-[8px]">AI REHBER</span>
                                 </div>
                                 <p class="text-slate-200 italic leading-relaxed text-xs">
-                                    "${analizMetni}"
+                                    "${item.analizMetni}"
                                 </p>
                             </div>
                         </div>
 
                         <div class="text-center md:min-w-[70px] justify-self-end sm:justify-self-center md:justify-self-auto">
                             <p class="text-[8px] text-slate-500 font-bold uppercase tracking-widest mb-1">Doluluk Oranı</p>
-                            <p class="text-sm md:text-base font-bold text-slate-300">${displayDoluluk}</p>
+                            <p class="text-sm md:text-base font-bold text-slate-300">${item.displayDoluluk}</p>
                         </div>
 
                         <div class="text-left sm:text-center md:text-right md:min-w-[85px] justify-self-start sm:justify-self-center md:justify-self-auto">
                             <p class="text-[8px] text-emerald-500 font-bold uppercase tracking-widest mb-1">Başarı Sırası</p>
-                            <p class="text-lg md:text-xl font-black text-emerald-400 tracking-tight">${displaySira}</p>
+                            <p class="text-lg md:text-xl font-black text-emerald-400 tracking-tight">${item.displaySira}</p>
                         </div>
 
                         <div class="text-right md:min-w-[90px] justify-self-end md:justify-self-auto">
                             <p class="text-[8px] text-blue-500 font-bold uppercase tracking-widest mb-1">Taban Puan</p>
-                            <p class="text-xl md:text-2xl font-black text-white tracking-tighter">${displayPuan}</p>
+                            <p class="text-xl md:text-2xl font-black text-white tracking-tighter">${item.displayPuan}</p>
                         </div>
                     </div>
                 </div>`;
         });
-        container.innerHTML = html || '<div class="p-20 text-center text-slate-500 italic">Kriterlere uygun sonuç bulunamadı.</div>';
+
+        if (totalCount > visibleCount) {
+            html += `
+                <div id="loadMoreSentinel" class="p-6 text-center border-t border-white/5 flex flex-col items-center justify-center gap-3">
+                    <div class="inline-block animate-spin rounded-full h-6 w-6 border-2 border-blue-500 border-t-transparent"></div>
+                    <button onclick="loadMoreResults()" class="px-6 py-2.5 bg-blue-600/80 hover:bg-blue-600 text-white font-bold text-xs rounded-xl transition-all shadow-lg border border-blue-500/30 tracking-wider uppercase">
+                        Daha Fazla Göster (${visibleCount} / ${totalCount})
+                    </button>
+                </div>
+            `;
+        } else if (totalCount === 0) {
+            html = '<div class="p-20 text-center text-slate-500 italic">Kriterlere uygun sonuç bulunamadı.</div>';
+        }
+
+        container.innerHTML = html;
+        setupInfiniteScroll();
+    }
+
+    function setupInfiniteScroll() {
+        const sentinel = document.getElementById('loadMoreSentinel');
+        if (!sentinel) return;
+
+        if (observer) {
+            observer.disconnect();
+        }
+
+        observer = new IntersectionObserver((entries) => {
+            if (entries[0].isIntersecting) {
+                loadMoreResults();
+            }
+        }, {
+            rootMargin: '150px'
+        });
+
+        observer.observe(sentinel);
+    }
+
+    function loadMoreResults() {
+        visibleCount += 100;
+        renderFilteredResults();
     }
 
     function tabDegistir(m) {
@@ -614,7 +684,7 @@
         } else {
             subTabs.classList.remove('hidden'); 
         }
-        ara();
+        ara(true);
     }
 
     function subTabDegistir(sm) {
@@ -627,7 +697,7 @@
         const activeBtn = document.getElementById('sub-btn-' + sm);
         activeBtn.classList.add('active', 'text-white', 'bg-blue-600');
         activeBtn.classList.remove('text-slate-400', 'bg-slate-800');
-        ara();
+        ara(true);
     }
     
     init();
